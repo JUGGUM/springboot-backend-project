@@ -30,4 +30,9 @@ public class MenuService {
   public void delete(long id){
     menuRepository.deleteById(id);
   }
+
+  public Menu findById(long id) {
+    return menuRepository.findById(id)
+        .orElseThrow(() -> new IllegalArgumentException("Menu doesn't exist. id =" + id));
+  }
 }
