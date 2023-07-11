@@ -6,6 +6,7 @@ import me.gayoungkim.menu.dto.MenuRequestDto;
 import me.gayoungkim.menu.service.MenuService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,5 +33,12 @@ public class MenuController {
     Menu menu = menuService.update(id, requestDto);
     return ResponseEntity.ok()
         .body(menu);
+  }
+
+  @DeleteMapping("/api/menus/{id}")
+  public ResponseEntity<Void> deleteMenu(@PathVariable long id){
+    menuService.delete(id);
+    return ResponseEntity.ok()
+        .build();
   }
 }
