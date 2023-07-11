@@ -27,4 +27,9 @@ public class Menu {
     this.title = title;
     this.link = link;
   }
+
+  public void update(String title, String link) {
+    this.title = title;
+    this.link = link;
+  }
 }
