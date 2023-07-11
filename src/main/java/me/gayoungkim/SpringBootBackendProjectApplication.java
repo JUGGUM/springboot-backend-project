@@ -1,4 +1,4 @@
-package me.gayoungkim.springbootbackendproject;
+package me.gayoungkim;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
