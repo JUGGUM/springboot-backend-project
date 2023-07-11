@@ -1,6 +1,7 @@
 package me.gayoungkim.menu.service;
 
 import jakarta.transaction.Transactional;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import me.gayoungkim.menu.domain.Menu;
 import me.gayoungkim.menu.dto.MenuRequestDto;
@@ -29,6 +30,10 @@ public class MenuService {
 
   public void delete(long id){
     menuRepository.deleteById(id);
+  }
+
+  public List<Menu> findAll() {
+    return menuRepository.findAll();
   }
 
   public Menu findById(long id) {

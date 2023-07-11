@@ -1,5 +1,6 @@
 package me.gayoungkim.menu.controller;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import me.gayoungkim.menu.domain.Menu;
 import me.gayoungkim.menu.dto.MenuRequestDto;
@@ -42,6 +43,17 @@ public class MenuController {
     menuService.delete(id);
     return ResponseEntity.ok()
         .build();
+  }
+
+  @GetMapping("/api/menus")
+  public ResponseEntity<List<MenuResponseDto>> findAllMenus() {
+    List<MenuResponseDto> menus = menuService.findAll()
+        .stream()
+        .map(MenuResponseDto::new)
+        .toList();
+
+    return ResponseEntity.ok()
+        .body(menus);
   }
 
   @GetMapping("/api/menus/{id}")
