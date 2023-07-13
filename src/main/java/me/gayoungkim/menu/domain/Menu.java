@@ -32,4 +32,8 @@ public class Menu {
     this.title = title;
     this.link = link;
   }
+
+  public boolean isTopMenu() {
+    return parent == null;
+  }
 }
