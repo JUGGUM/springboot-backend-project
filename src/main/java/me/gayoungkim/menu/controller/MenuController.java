@@ -2,12 +2,15 @@ package me.gayoungkim.menu.controller;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import me.gayoungkim.banner.dto.BannerRequestDto;
 import me.gayoungkim.menu.domain.Menu;
 import me.gayoungkim.menu.dto.MenuRequestDto;
 import me.gayoungkim.menu.dto.MenuResponseDto;
+import me.gayoungkim.menu.dto.SubMenuRequestDto;
 import me.gayoungkim.menu.service.MenuService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +26,7 @@ public class MenuController {
   private final MenuService menuService;
 
   @PostMapping("/api/menus")
-  public ResponseEntity<Menu> addMenu(@RequestBody MenuRequestDto requestDto) {
+  public ResponseEntity<Menu> addMenu(@RequestBody @Validated MenuRequestDto requestDto) {
     Menu menu = menuService.save(requestDto);
 
     return ResponseEntity.status(HttpStatus.CREATED)
@@ -62,5 +65,29 @@ public class MenuController {
 
     return ResponseEntity.ok()
         .body(new MenuResponseDto(menu));
+  }
+
+  @GetMapping("/api/menus/{id}/submenus")
+  public ResponseEntity<List<Menu>> findAllSubMenus(@PathVariable long id) {
+    List<Menu> subMenus = menuService.findSubMenus(id);
+    return ResponseEntity.ok()
+        .body(subMenus);
+  }
+
+  @PostMapping("/api/menus/{id}/submenus")
+  public ResponseEntity<Menu> addSubMenu(@PathVariable long id,
+      @RequestBody SubMenuRequestDto subMenuRequestDto) {
+    Menu menu = menuService.saveSubmenu(id, subMenuRequestDto);
+
+    return ResponseEntity.status(HttpStatus.CREATED)
+        .body(menu);
+  }
+
+  @PostMapping("/api/menus/{id}/banner")
+  public ResponseEntity<Menu> updateBanner(@PathVariable long id,
+      @RequestBody BannerRequestDto requestDto) {
+    Menu menu = menuService.updateBanner(id, requestDto);
+    return ResponseEntity.status(HttpStatus.CREATED)
+        .body(menu);
   }
 }
