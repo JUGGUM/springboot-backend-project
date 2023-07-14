@@ -10,7 +10,7 @@ public class MenuResponseDto {
   private final Long id;
   private final String title;
   private final String link;
-  private List<Menu> subMenus = new ArrayList<>();
+  private final List<Menu> subMenus;
 
   public MenuResponseDto(Menu menu) {
     this.id = menu.getId();
