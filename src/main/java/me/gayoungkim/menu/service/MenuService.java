@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import me.gayoungkim.banner.domain.Banner;
 import me.gayoungkim.banner.dto.BannerRequestDto;
 import me.gayoungkim.banner.repository.BannerRepository;
+import me.gayoungkim.base.error.exception.MenuNotFoundException;
+import me.gayoungkim.base.error.exception.MenuNotTopMenuException;
 import me.gayoungkim.menu.domain.Menu;
 import me.gayoungkim.menu.dto.MenuRequestDto;
 import me.gayoungkim.menu.dto.SubMenuRequestDto;
@@ -27,7 +29,7 @@ public class MenuService {
   @Transactional
   public Menu update(long id, MenuRequestDto requestDto) {
     Menu menu = menuRepository.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("Menu doesn't exist. id =" + id));
+        .orElseThrow(MenuNotFoundException::new);
 
     menu.update(requestDto.getTitle(), requestDto.getLink());
 
@@ -44,15 +46,15 @@ public class MenuService {
 
   public Menu findById(long id) {
     return menuRepository.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("Menu doesn't exist. id =" + id));
+        .orElseThrow(MenuNotFoundException::new);
   }
 
   public Menu saveSubmenu(long id, SubMenuRequestDto subMenuRequestDto) {
     Menu menu = menuRepository.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("Invalid menu"));
+        .orElseThrow(MenuNotFoundException::new);
 
     if (!menu.isTopMenu()) {
-      throw new IllegalArgumentException(("Banner can only be attached to top menu"));
+      throw new MenuNotTopMenuException();
     }
 
     Menu subMenu = menuRepository.save(subMenuRequestDto.toEntity());
@@ -67,10 +69,10 @@ public class MenuService {
 
   public Menu updateBanner(long id, BannerRequestDto requestDto) {
     Menu menu = menuRepository.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("Invalid menu"));
+        .orElseThrow(MenuNotFoundException::new);
 
     if (!menu.isTopMenu()) {
-      throw new IllegalArgumentException(("Banner can only be attached to top menu"));
+      throw new MenuNotTopMenuException();
     }
 
     Banner banner = bannerRepository.save(requestDto.toEntity());
