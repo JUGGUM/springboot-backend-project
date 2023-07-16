@@ -36,7 +36,7 @@ public class MenuService {
     return menu;
   }
 
-  public void delete(long id){
+  public void delete(long id) {
     menuRepository.deleteById(id);
   }
 

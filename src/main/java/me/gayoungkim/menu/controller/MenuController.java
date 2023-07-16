@@ -42,7 +42,7 @@ public class MenuController {
   }
 
   @DeleteMapping("/api/menus/{id}")
-  public ResponseEntity<Void> deleteMenu(@PathVariable long id){
+  public ResponseEntity<Void> deleteMenu(@PathVariable long id) {
     menuService.delete(id);
     return ResponseEntity.ok()
         .build();

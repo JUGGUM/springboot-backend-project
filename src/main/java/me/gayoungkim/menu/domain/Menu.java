@@ -46,7 +46,7 @@ public class Menu {
   private Banner banner;
 
   @Builder
-  public Menu(String title, String link){
+  public Menu(String title, String link) {
     this.title = title;
     this.link = link;
   }

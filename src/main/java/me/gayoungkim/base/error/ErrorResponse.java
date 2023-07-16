@@ -1,6 +1,5 @@
 package me.gayoungkim.base.error;
 
-import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
