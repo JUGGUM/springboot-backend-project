@@ -151,8 +151,6 @@ response:
     "parent": null, # 상위 메뉴
     "banner": null, # 배너 정보
 }
-
-
 ```
 
 ### 메뉴 수정 API
@@ -170,7 +168,6 @@ response:
     "parent": null, # 상위 메뉴
     "banner": null, # 배너 정보
 }
-
 ```
 
 ### 하위 메뉴등록 API
@@ -268,7 +265,6 @@ http://localhost:8080/api/menus/{id}/submenus
 request:
 http://localhost:8080/api/menus/{id}
 ```
-
 
 
 # 문제 해결 전략
