@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import java.security.Principal;
+import java.util.Random;
 import me.gayoungkim.base.error.ErrorCode;
 import me.gayoungkim.menu.dto.MenuRequestDto;
 import me.gayoungkim.menu.repository.MenuRepository;
@@ -28,7 +29,6 @@ import org.springframework.web.context.WebApplicationContext;
 @SpringBootTest
 @AutoConfigureMockMvc
 class MenuControllerTest {
-
   @Autowired
   protected MockMvc mockMvc;
 
